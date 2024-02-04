@@ -1,7 +1,30 @@
+function clone-aur
+	pushd .
+	if ! test -d ~/.local/src
+		mkdir -p ~/.local/src
+	end
+	cd ~/.local/src && git clone https://aur.archlinux.org/"$argv".git "$argv"
+	cd "$argv"
+end
+
+function clone-gitlab
+	pushd .
+	if ! test -d ~/.local/src
+		mkdir -p ~/.local/src
+	end
+	cd ~/.local/src && git clone https://gitlab.archlinux.org/archlinux/packaging/packages/"$argv".git "$argv"
+	cd "$argv"
+end
+
+function search-aur
+	curl https://aur.archlinux.org/rpc/v5/search/"$argv" | jq '{"results"}'
+end
+
+fish_add_path -aP "/usr/sbin"
+fish_add_path -aP "/usr/local/sbin"
+fish_add_path -aP "/sbin"
+
 if status is-interactive
-	fish_add_path -aP "/usr/sbin"
-	fish_add_path -aP "/usr/local/sbin"
-	fish_add_path -aP "/sbin"
 
 	for editor in "vim" "vi" "ed" "nano"
 		if which $editor 2>/dev/null 1>&2
