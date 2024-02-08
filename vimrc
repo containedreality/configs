@@ -23,7 +23,6 @@ call plug#begin("~/.config/nvim/plugins")
 	Plug 'liuchengxu/vista.vim'
 call plug#end()
 
-set ve+=onemore
 set timeoutlen=2000
 let mapleader=' '
 nmap <leader>e :NnnPicker <CR>
@@ -40,16 +39,10 @@ nmap j jzz
 nmap k kzz
 vmap k kzz
 vmap j jzz
-imap <Esc> <Esc>l
-nmap $ $l
 
 colorscheme purify
 
 let g:nnn#set_default_mappings = 0
 
-let CursorColumnI = 0 "the cursor column position in INSERT
-autocmd InsertEnter * let CursorColumnI = col('.')
-autocmd CursorMovedI * let CursorColumnI = col('.')
-autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) | endif
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd FileType markdown set spell
