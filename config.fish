@@ -20,6 +20,9 @@ function search-aur
 	curl https://aur.archlinux.org/rpc/v5/search/"$argv" | jq '{"results"}'
 end
 
+function fish_greeting
+end
+
 fish_add_path -aP "/usr/sbin"
 fish_add_path -aP "/usr/local/sbin"
 fish_add_path -aP "/sbin"
