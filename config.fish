@@ -23,9 +23,14 @@ end
 function fish_greeting
 end
 
+function fish_prompt
+    echo (set_color 5f5f5f)"["(set_color blue)$USER(set_color normal)@(prompt_hostname) (set_color blue)(prompt_pwd)(set_color 5f5f5f)"]"(set_color normal)" "
+end
+
 fish_add_path -aP "/usr/sbin"
 fish_add_path -aP "/usr/local/sbin"
 fish_add_path -aP "/sbin"
+fish_add_path -aP "/home/$USER/.local/bin"
 
 if status is-interactive
 
