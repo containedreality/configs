@@ -34,7 +34,7 @@ fish_add_path -aP "/home/$USER/.local/bin"
 
 if status is-interactive
 
-	for editor in "vim" "vi" "ed" "nano"
+	for editor in "kak" "vim" "vi" "ed" "nano"
 		if which $editor 2>/dev/null 1>&2
 			set -x EDITOR "$editor"
 			break
