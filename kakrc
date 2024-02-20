@@ -1,6 +1,4 @@
 # probably very poorly made kakoune configuration
-map global normal $ gll
-map global normal 0 gh
 map global normal D xd
 map global normal Y xy
 map global normal <c-e> ":edit "
@@ -13,7 +11,7 @@ map global insert "<c-[>" "<esc>glli {"
 map global normal <c-q> ":q!<ret>"
 map global insert <c-q> "<esc>:q!<ret>"
 
-add-highlighter global/ number-lines
+add-highlighter global/ number-lines -relative
 
 hook global WinSetOption filetype=(js|c|cc|cpp|sh|rust|python|zig|ruby) %{
 	expandtab # must be before softtabstop
