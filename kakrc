@@ -39,3 +39,10 @@ plug "occivink/kakoune-sudo-write"
 plug "whereswaldon/shellcheck.kak"
 
 enable-auto-pairs
+
+# other defined commands
+define-command math -params 1 %{
+    evaluate-commands %sh{
+        echo 'execute-keys "i%sh{echo $(($1))}<esc>"'
+    }
+}
