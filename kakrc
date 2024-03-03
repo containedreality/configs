@@ -13,7 +13,7 @@ map global insert <c-q> "<esc>:q!<ret>"
 
 add-highlighter global/ number-lines -relative
 
-hook global WinSetOption filetype=(js|c|cc|cpp|sh|rust|python|zig|ruby) %{
+hook global WinSetOption filetype=.* %{
 	expandtab # must be before softtabstop
 	set-option buffer indentwidth 4
 	set-option global softtabstop 4 # number of spaces to delete on backspace
