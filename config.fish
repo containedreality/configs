@@ -2,7 +2,7 @@ function fish_greeting
 end
 
 function fish_prompt
-    echo (set_color green)$USER@(prompt_hostname)(set_color normal):(set_color blue)(prompt_pwd)(set_color normal)'$ '
+    echo (set_color -o green)$USER@(prompt_hostname)(set_color normal):(set_color -o blue)(prompt_pwd)(set_color normal)'$ '
 end
 
 fish_add_path -aP "/usr/sbin"
