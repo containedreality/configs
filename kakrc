@@ -2,12 +2,12 @@
 map global normal D xd
 map global normal Y xy
 map global normal <c-e> ":edit "
-map global normal <c-i> ":buffer-previous<ret>"
-map global normal <c-o> ":buffer-next<ret>"
-map global normal <c-u> ":delete-buffer<ret>"
 map global insert <c-l> <esc>glli
+map global insert <c-o> <esc>o
 map global insert "<c-;>" "<esc>glli;"
 map global insert "<c-[>" "<esc>glli {"
+map global insert "<c-.>" "<esc>glli."
+map global insert <c-o> "<esc>"
 map global normal <c-q> ":q!<ret>"
 map global insert <c-q> "<esc>:q!<ret>"
 
