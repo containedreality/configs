@@ -1,5 +1,5 @@
 #!/bin/sh
-packages="kakoune newsboat fish xclip ruby-dev curl busybox-static git build-essential"
+packages="kakoune newsboat fish xclip ruby-dev curl busybox-static git build-essential kitty"
 
 if [ "$1" = 'install-programs' ]; then
     sudo apt install -y $packages
