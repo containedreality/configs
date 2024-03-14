@@ -40,12 +40,12 @@ function __git_status
 end
 
 function fish_prompt
-  echo -n (set_color white)"╭─"(set_color normal)
+  echo -n (set_color white)"╭"(set_color normal)
   __user_host
   __current_path
   __git_status
   echo -e ''
-  echo (set_color white)"╰─"(set_color --bold white)"\$ "(set_color normal)
+  echo (set_color white)"╰"(set_color --bold white)"\$ "(set_color normal)
 end
 
 function fish_right_prompt
