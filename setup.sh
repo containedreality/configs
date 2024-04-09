@@ -1,7 +1,10 @@
 #!/bin/sh
+packages_arch="kakoune newsboat fish xclip ruby curl busybox base-devel kitty"
 packages="kakoune newsboat fish xclip ruby-dev curl busybox-static git build-essential kitty"
 
 if [ "$1" = 'install-programs' ]; then
+    # I understand this is sort of a bad way to do this, a better way would be detecting package manager, but also I do not care.
+    sudo pacman -S --noconfirm $packages_arch
     sudo apt install -y $packages
 fi
 
