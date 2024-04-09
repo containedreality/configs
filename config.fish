@@ -83,6 +83,11 @@ if status is-interactive
     abbr -a apts "apt-cache search"
     abbr -a aptc "sudo apt clean && sudo apt autoremove"
 
+    abbr -a paci "sudo pacman -S"
+    abbr -a pacr "sudo pacman -R"
+    abbr -a pacu "sudo pacman -Syu"
+    abbr -a pacs "pacman -Ss"
+
     abbr -a sc "systemctl"
     abbr -a ssc "sudo systemctl"
     abbr -a jc "journalctl"
