@@ -41,12 +41,7 @@ alias pp="pwd > /tmp/path-persist-$USER"
 # environment
 append_path "${HOME}/.local/bin"
 append_path "${HOME}/go/bin"
-append_path "/bin"
-append_path "/sbin"
-append_path "/usr/bin"
-append_path "/usr/local/bin"
-append_path "/usr/local/sbin"
-append_path "/usr/sbin"
+append_path "/opt/go/bin"
 
 for i in librewolf firefox chromium; do
 	if command -v "$i" >/dev/null; then
@@ -57,33 +52,32 @@ for i in librewolf firefox chromium; do
 	export BROWSER="none"
 done
 
-for i in vim vi nano kak ed; do
+for i in vim vi nano ed; do
 	if command -v "$i" >/dev/null; then
 		export EDITOR="$i"
 		break
 	fi
 done
 
-if [ "$TERM" = 'xterm-kitty' ]; then
-	# fixes SSH on external hosts.
-	alias ssh='TERM=xterm-256color ssh'
-fi
-
 export HISTFILE="${HOME}/.cache/bash_history"
 export HISTSIZE=100000
 export SAVEHIST=1000
 export PAGER="/usr/bin/less"
 
-if [ -x '/usr/bin/sudo-rs' ]; then
-	alias sudo='sudo-rs'
-fi
-
+# shell and utils
 alias q="exit"
+alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 alias l="ls"
 alias ll="ls -alh"
 alias la="ls -aC"
-alias grep="grep --color=auto"
+
+# apt
+alias aptu="sudo apt update && sudo apt upgrade"
+alias apti="sudo apt install"
+alias aptr="sudo apt remove"
+alias aptc="sudo apt clean && sudo apt autoremove"
+alias apts="apt-cache search"
 
 # git
 alias g="git"
@@ -106,7 +100,7 @@ prompt() {
 	branch=$(git branch --no-color 2>/dev/null | cut -d' ' -f2)
 	changes=$(git status -s -uno 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
 
-	color='35m'
+	color='32m'
 
 	if [ -z "${branch}" ]; then
 		PS1="${VIRTUAL_ENV_PROMPT}\[\e[90m\][\[\e[${color}\]\u\[\e[0m\]@\h \W\[\e[90m\]]\[\e[0m\]\$ "
