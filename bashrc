@@ -31,6 +31,12 @@ arc()
 	tar -I'zstd -v -8 -T0' --xattrs -cf "$(basename "$1")-$(date +'%m%d%y')".tar.zst -C "$1" .
 }
 
+# more portable, ready for the distribution among the masses! (maybe)
+parc()
+{
+	tar -I'gzip -v -4' --owner=0 --group=0 --xattrs -cf "$(basename "$1")-$(date +'%m%d%y')".tar.gz -C "$1" .
+}
+
 # Persist path, if file exists.
 if [ -r "/tmp/path-persist-$USER" ]; then
     cd $(cat "/tmp/path-persist-$USER")
@@ -72,6 +78,7 @@ alias l="ls"
 alias ll="ls -alh"
 alias la="ls -aC"
 alias ng="nekoget"
+alias gpg="gpg --digest-algo SHA512 --cipher-algo AES256"
 
 # apt
 alias aptu="sudo apt update && sudo apt upgrade"
