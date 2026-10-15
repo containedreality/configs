@@ -33,7 +33,7 @@ arc()
 
 earc()
 {
-	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | openssl enc -pbkdf2 -iter 800000 -aes-256-ctr | tee "$(basename "$1")-$(date +'%m%d%y')".tar.zst.enc | openssl dgst -r -sha512
+	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | openssl enc -pbkdf2 -iter 800000 -saltlen 16 -aes-256-ctr | tee "$(basename "$1")-$(date +'%m%d%y')".tar.zst.enc | openssl dgst -r -sha512
 }
 
 # more portable, ready for the distribution among the masses! (maybe)
@@ -72,7 +72,7 @@ ax()
 			7z x $@
 			;;
 		*.enc)
-			openssl enc -d -pbkdf2 -iter 800000 -aes-256-ctr -in "$1" | tar -xattrs --zstd -xf -
+			openssl enc -d -pbkdf2 -iter 800000 -aes-256-ctr -in "$1" | tar --xattrs --zstd -xf -
 			;;
 		*.tar*)
 			tar --xattrs -xvf $@
