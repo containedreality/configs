@@ -72,7 +72,7 @@ ax()
 			7z x $@
 			;;
 		*.enc)
-			openssl enc -d -pbkdf2 -iter 800000 -aes-256-ctr -in "$1" | tar --xattrs --zstd -xf -
+			openssl enc -d -pbkdf2 -iter 800000 -saltlen 16 -aes-256-ctr -in "$1" | tar --xattrs --zstd -xf -
 			;;
 		*.tar*)
 			tar --xattrs -xvf $@
