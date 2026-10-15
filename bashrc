@@ -31,10 +31,59 @@ arc()
 	tar -I'zstd -v -8 -T0' --xattrs -cf "$(basename "$1")-$(date +'%m%d%y')".tar.zst -C "$1" .
 }
 
+earc()
+{
+	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | openssl enc -pbkdf2 -iter 800000 -aes-256-ctr | tee "$(basename "$1")-$(date +'%m%d%y')".tar.zst.enc | openssl dgst -r -sha512
+}
+
 # more portable, ready for the distribution among the masses! (maybe)
 parc()
 {
 	tar -I'gzip -v -4' --owner=0 --group=0 --xattrs -cf "$(basename "$1")-$(date +'%m%d%y')".tar.gz -C "$1" .
+}
+
+al()
+{
+	# $@ is used so we can use user parameters.
+	case "$1" in
+		*.7z)
+			7z l $@
+			;;
+		*.enc)
+			openssl enc -d -pbkdf2 -iter 800000 -aes-256-ctr -in "$1" | tar --zstd -tf -
+			;;
+		*.tar*)
+			tar -vtf $@
+			;;
+		*.zip)
+			unzip -v $@
+			;;
+		*.rar)
+			unrar -t $@
+			;;
+	esac
+}
+
+ax()
+{
+	# $@ is used so we can use user parameters.
+	case "$1" in
+		*.7z)
+			7z x $@
+			;;
+		*.enc)
+			openssl enc -d -pbkdf2 -iter 800000 -aes-256-ctr -in "$1" | tar -xattrs --zstd -xf -
+			;;
+		*.tar*)
+			tar --xattrs -xvf $@
+			;;
+		*.zip)
+			unzip $@
+			;;
+		*.rar)
+			unrar -x $@
+			;;
+	esac
 }
 
 # Persist path, if file exists.
