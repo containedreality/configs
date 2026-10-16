@@ -33,7 +33,7 @@ arc()
 
 earc()
 {
-	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | openssl enc -pbkdf2 -iter 800000 -saltlen 16 -aes-256-ctr | tee "$(basename "$1")-$(date +'%m%d%y')".tar.zst.enc | openssl dgst -r -sha512
+	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | openssl enc -pbkdf2 -iter "${ARCHIVE_ITERS}" -saltlen 16 -"${ARCHIVE_CIPHER}" | tee "$(basename "$1")-$(date +'%m%d%y')"-${ARCHIVE_CIPHER}.${ARCHIVE_ITERS}.enc | openssl dgst -r -sha512
 }
 
 # more portable, ready for the distribution among the masses! (maybe)
@@ -50,7 +50,7 @@ al()
 			7z l $@
 			;;
 		*.enc)
-			openssl enc -d -pbkdf2 -iter 800000 -aes-256-ctr -in "$1" | tar --zstd -tf -
+			openssl enc -d -pbkdf2 -iter "${ARCHIVE_ITERS}" -"${ARCHIVE_CIPHER}" -in "$1" | tar --zstd -tf -
 			;;
 		*.tar*)
 			tar -vtf $@
@@ -72,7 +72,7 @@ ax()
 			7z x $@
 			;;
 		*.enc)
-			openssl enc -d -pbkdf2 -iter 800000 -saltlen 16 -aes-256-ctr -in "$1" | tar --xattrs --zstd -xf -
+			openssl enc -d -pbkdf2 -iter "${ARCHIVE_ITERS}" -saltlen 16 -"${ARCHIVE_CIPHER}" -in "$1" | tar --xattrs --zstd -xf -
 			;;
 		*.tar*)
 			tar --xattrs -xvf $@
@@ -114,6 +114,8 @@ for i in vim vi nano ed; do
 	fi
 done
 
+export ARCHIVE_CIPHER='chacha20'
+export ARCHIVE_ITERS='800000'
 export HISTFILE="${HOME}/.cache/bash_history"
 export HISTSIZE=100000
 export SAVEHIST=1000
