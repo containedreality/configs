@@ -33,7 +33,7 @@ arc()
 
 earc()
 {
-	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | openssl enc -pbkdf2 -iter "${ARCHIVE_ITERS}" -saltlen 16 -"${ARCHIVE_CIPHER}" | tee "$(basename "$1")-$(date +'%m%d%y')"-${ARCHIVE_CIPHER}.${ARCHIVE_ITERS}.enc | openssl dgst -r -sha512
+	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | openssl enc -pbkdf2 -iter "${ARCHIVE_ITERS}" -saltlen 16 -"${ARCHIVE_CIPHER}" | tee "$(basename "$1")-$(date +'%m%d%y')"-${ARCHIVE_CIPHER}.${ARCHIVE_ITERS}.enc | openssl dgst -blake2b512
 }
 
 # more portable, ready for the distribution among the masses! (maybe)
