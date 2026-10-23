@@ -3,5 +3,6 @@
     "mesonbuild.downloadLanguageServer": true,
     "explorer.confirmDragAndDrop": false,
     "workbench.activityBar.location": "bottom",
-    "workbench.iconTheme": "vs-minimal"
+    "workbench.iconTheme": "vs-minimal",
+    "workbench.colorTheme": "Quiet Light"
 }
