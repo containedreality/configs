@@ -6,7 +6,9 @@ fi
 
 mkdir -p ${HOME}/.local/share
 mkdir -p ${HOME}/.local/bin
+mkdir -p ${HOME}/.config/VSCodium/User
 cp -v vimrc ${HOME}/.vimrc
+cp -v settings.json ${HOME}/.config/VSCodium/User
 
 cp -v bashrc ${HOME}/.bashrc
 cp -v gitconfig ${HOME}/.gitconfig
