@@ -2,5 +2,6 @@
     "explorer.confirmDelete": false,
     "mesonbuild.downloadLanguageServer": true,
     "explorer.confirmDragAndDrop": false,
-    "workbench.activityBar.location": "bottom"
+    "workbench.activityBar.location": "bottom",
+    "workbench.iconTheme": "vs-minimal"
 }
