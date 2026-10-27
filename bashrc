@@ -26,6 +26,11 @@ prepend_path()
     esac
 }
 
+cd()
+{
+	pushd "$@" >/dev/null
+}
+
 arc()
 {
 	tar -I'zstd -v -8 -T0' --xattrs -cf "$(basename "$1")-$(date +'%m%d%y')".tar.zst -C "$1" .
@@ -159,7 +164,7 @@ prompt() {
 	branch=$(git branch --no-color 2>/dev/null | cut -d' ' -f2)
 	changes=$(git status -s -uno 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
 
-	color='32m'
+	color='31m'
 
 	if [ -z "${branch}" ]; then
 		PS1="${VIRTUAL_ENV_PROMPT}\[\e[90m\][\[\e[${color}\]\u\[\e[0m\]@\h \W\[\e[90m\]]\[\e[0m\]\$ "
