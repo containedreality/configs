@@ -167,9 +167,9 @@ prompt() {
 	color='31m'
 
 	if [ -z "${branch}" ]; then
-		PS1="${VIRTUAL_ENV_PROMPT}\[\e[90m\][\[\e[${color}\]\u\[\e[0m\]@\h \W\[\e[90m\]]\[\e[0m\]\$ "
+		PS1="\[\e[90m\][\[\e[${color}\]\u\[\e[0m\]@\h \W\[\e[90m\]]\[\e[0m\]\$ "
 	else
-		PS1="${VIRTUAL_ENV_PROMPT}[${branch}:${changes}] \[\e[90m\][\[\e[${color}\]\u\[\e[0m\]@\h \W\[\e[90m\]]\[\e[0m\]\$ "
+		PS1="[${branch}:${changes}] \[\e[90m\][\[\e[${color}\]\u\[\e[0m\]@\h \W\[\e[90m\]]\[\e[0m\]\$ "
 	fi
 }
 
