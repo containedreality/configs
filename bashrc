@@ -28,7 +28,11 @@ prepend_path()
 
 cd()
 {
-	pushd "$@" >/dev/null
+	if [ -z "$1" ]; then
+		cd "${HOME}"
+	else
+		pushd "$1" >/dev/null
+	fi
 }
 
 arc()
@@ -71,22 +75,21 @@ al()
 
 ax()
 {
-	# $@ is used so we can use user parameters.
 	case "$1" in
 		*.7z)
-			7z x $@
+			7z x $*
 			;;
 		*.enc)
 			openssl enc -d -pbkdf2 -iter "${ARCHIVE_ITERS}" -saltlen 16 -"${ARCHIVE_CIPHER}" -in "$1" | tar --xattrs --zstd -xf -
 			;;
 		*.tar*)
-			tar --xattrs -xvf $@
+			tar --xattrs -xvf $*
 			;;
 		*.zip)
-			unzip $@
+			unzip $*
 			;;
 		*.rar)
-			unrar -x $@
+			unrar -x $*
 			;;
 	esac
 }
