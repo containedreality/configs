@@ -140,8 +140,8 @@ alias ll="ls -alh"
 alias la="ls -aC"
 alias ng="nekoget"
 alias gpg="gpg --digest-algo SHA512 --cipher-algo AES256"
-alias shred='shred -vzn3'
-alias hshred='shred -vzn3 -s 32M' # for destroying headers
+alias shred='shred -vzn2'
+alias hshred='shred -vzn2 -s 32M' # for destroying headers
 
 # apt
 alias aptu="sudo apt update && sudo apt upgrade"
