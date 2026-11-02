@@ -59,7 +59,7 @@ al()
 			7z l $@
 			;;
 		*.enc)
-			openssl enc -d -pbkdf2 -iter "${ARCHIVE_ITERS}" -"${ARCHIVE_CIPHER}" -in "$1" | tar --zstd -tf -
+			openssl enc -d -pbkdf2 -saltlen 16 -iter "${ARCHIVE_ITERS}" -"${ARCHIVE_CIPHER}" -in "$1" | tar --zstd -tf -
 			;;
 		*.tar*)
 			tar -vtf $@
@@ -77,19 +77,19 @@ ax()
 {
 	case "$1" in
 		*.7z)
-			7z x $*
+			7z x $@
 			;;
 		*.enc)
 			openssl enc -d -pbkdf2 -iter "${ARCHIVE_ITERS}" -saltlen 16 -"${ARCHIVE_CIPHER}" -in "$1" | tar --xattrs --zstd -xf -
 			;;
 		*.tar*)
-			tar --xattrs -xvf $*
+			tar --xattrs -xvf $@
 			;;
 		*.zip)
-			unzip $*
+			unzip $@
 			;;
 		*.rar)
-			unrar -x $*
+			unrar -x $@
 			;;
 	esac
 }
