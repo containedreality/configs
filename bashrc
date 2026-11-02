@@ -122,12 +122,14 @@ for i in vim vi nano ed; do
 	fi
 done
 
+export PAGER="$(which less)"
+
 export ARCHIVE_CIPHER='chacha20'
 export ARCHIVE_ITERS='800000'
+
 export HISTFILE="${HOME}/.cache/bash_history"
 export HISTSIZE=100000
 export SAVEHIST=1000
-export PAGER="/usr/bin/less"
 
 # shell and utils
 alias q="exit"
@@ -138,6 +140,8 @@ alias ll="ls -alh"
 alias la="ls -aC"
 alias ng="nekoget"
 alias gpg="gpg --digest-algo SHA512 --cipher-algo AES256"
+alias shred='shred -vzn3'
+alias hshred='shred -vzn3 -s 32M' # for destroying headers
 
 # apt
 alias aptu="sudo apt update && sudo apt upgrade"
@@ -161,9 +165,11 @@ alias gs="git status"
 alias gd="git diff"
 alias gb="git branch"
 alias gss="git show"
+alias gt="git tag"
 
 # prompt
-prompt() {
+prompt()
+{
 	branch=$(git branch --no-color 2>/dev/null | cut -d' ' -f2)
 	changes=$(git status -s -uno 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
 
