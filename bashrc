@@ -26,15 +26,6 @@ prepend_path()
     esac
 }
 
-cd()
-{
-	if [ -z "$1" ]; then
-		cd "${HOME}"
-	else
-		pushd "$1" >/dev/null
-	fi
-}
-
 arc()
 {
 	tar -I'zstd -v -8 -T0' --xattrs -cf "$(basename "$1")-$(date +'%m%d%y')".tar.zst -C "$1" .
