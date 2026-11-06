@@ -33,7 +33,7 @@ arc()
 
 earc()
 {
-	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | openssl enc -pbkdf2 -iter "${ARCHIVE_ITERS}" -saltlen 16 -"${ARCHIVE_CIPHER}" | tee "$(basename "$1")-$(date +'%m%d%y')"-${ARCHIVE_CIPHER}.${ARCHIVE_ITERS}.enc | openssl dgst -blake2b512
+	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | encrypt -a "${ARCHIVE_CIPHER}" | tee "$(basename "$1")-$(date +'%m%d%y')"-${ARCHIVE_CIPHER}.enc | digest -a blake2s
 }
 
 # more portable, ready for the distribution among the masses! (maybe)
@@ -50,7 +50,7 @@ al()
 			7z l $@
 			;;
 		*.enc)
-			openssl enc -d -pbkdf2 -saltlen 16 -iter "${ARCHIVE_ITERS}" -"${ARCHIVE_CIPHER}" -in "$1" | tar --zstd -tf -
+			decrypt -a "${ARCHIVE_CIPHER}" -i "$1" | tar --zstd -vtf -
 			;;
 		*.tar*)
 			tar -vtf $@
@@ -71,7 +71,7 @@ ax()
 			7z x $@
 			;;
 		*.enc)
-			openssl enc -d -pbkdf2 -iter "${ARCHIVE_ITERS}" -saltlen 16 -"${ARCHIVE_CIPHER}" -in "$1" | tar --xattrs --zstd -xf -
+			decrypt -a "${ARCHIVE_CIPHER}" -i "$1" | tar --zstd -xvf -
 			;;
 		*.tar*)
 			tar --xattrs -xvf $@
@@ -115,8 +115,7 @@ done
 
 export PAGER="$(which less)"
 
-export ARCHIVE_CIPHER='chacha20'
-export ARCHIVE_ITERS='800000'
+export ARCHIVE_CIPHER='crdpa'
 
 export HISTFILE="${HOME}/.cache/bash_history"
 export HISTSIZE=100000
