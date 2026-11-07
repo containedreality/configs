@@ -33,7 +33,7 @@ arc()
 
 earc()
 {
-	tar -I'zstd -8 -T0' --xattrs -cf - -C "$1" . | encrypt -a "${ARCHIVE_CIPHER}" | tee "$(basename "$1")-$(date +'%m%d%y')"-${ARCHIVE_CIPHER}.enc | digest -a blake2s
+	tar -I'zstd -8 -T0' --xattrs -cf - "$1" | encrypt -a "${ARCHIVE_CIPHER}" | tee "$(basename "$1")-$(date +'%m%d%y')"-${ARCHIVE_CIPHER}.enc | digest -a blake2s
 }
 
 # more portable, ready for the distribution among the masses! (maybe)
