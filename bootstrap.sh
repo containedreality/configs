@@ -22,16 +22,16 @@ rm -f ${HOME}/.bash_profile
 ln -s ${HOME}/.bashrc ${HOME}/.bash_profile
 
 if ! [ -x "${HOME}/.local/bin/encrypt" ]; then
-	curl -Lo "${HOME}/.local/bin/encrypt" "${REPO_ENCRYPT}"/encrypt-linux-arm64
+	curl -Lo "${HOME}/.local/bin/encrypt" "${REPO_ENCRYPT}"/encrypt-linux-amd64
 	chmod +x "${HOME}/.local/bin/encrypt"
 fi
 
 if ! [ -x "${HOME}/.local/bin/decrypt" ]; then
-	curl -Lo "${HOME}/.local/bin/decrypt" "${REPO_ENCRYPT}"/decrypt-linux-arm64
+	curl -Lo "${HOME}/.local/bin/decrypt" "${REPO_ENCRYPT}"/decrypt-linux-amd64
 	chmod +x "${HOME}/.local/bin/decrypt"
 fi
 
 if ! [ -x "${HOME}/.local/bin/digest" ]; then
-	curl -Lo "${HOME}/.local/bin/digest" "${REPO_ENCRYPT}"/digest-linux-arm64
+	curl -Lo "${HOME}/.local/bin/digest" "${REPO_ENCRYPT}"/digest-linux-amd64
 	chmod +x "${HOME}/.local/bin/digest"
 fi
