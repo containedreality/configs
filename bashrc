@@ -163,7 +163,7 @@ prompt()
 	branch=$(git branch --no-color 2>/dev/null | cut -d' ' -f2)
 	changes=$(git status -s -uno 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
 
-	color='31m'
+	color='38;2;200;150;255m'
 
 	if [ -z "${branch}" ]; then
 		PS1="\[\e[90m\][\[\e[${color}\]\u\[\e[0m\]@\h \W\[\e[90m\]]\[\e[0m\]\$ "
