@@ -1,8 +1,19 @@
 #!/bin/sh
 REPO_ENCRYPT="https://github.com/containedreality/encrypt/releases/download/v1.0.0/"
 
-if ! [ -x /usr/bin/curl ]; then
-	sudo apt-get -y install curl
+if [ "$1" = 'install-software' ]; then
+	sudo apt-get -y install extrepo
+	extrepo enable vscodium
+	sudo apt-get -y install curl keepassxc codium
+	
+	curl -Lo "${HOME}/.local/bin/encrypt" "${REPO_ENCRYPT}"/encrypt-linux-amd64
+	chmod +x "${HOME}/.local/bin/encrypt"
+
+	curl -Lo "${HOME}/.local/bin/decrypt" "${REPO_ENCRYPT}"/decrypt-linux-amd64
+	chmod +x "${HOME}/.local/bin/decrypt"
+
+	curl -Lo "${HOME}/.local/bin/digest" "${REPO_ENCRYPT}"/digest-linux-amd64
+	chmod +x "${HOME}/.local/bin/digest"
 fi
 
 if [ -z "${HOME}" ]; then
@@ -21,17 +32,3 @@ cp -v gitconfig ${HOME}/.gitconfig
 rm -f ${HOME}/.bash_profile
 ln -s ${HOME}/.bashrc ${HOME}/.bash_profile
 
-if ! [ -x "${HOME}/.local/bin/encrypt" ]; then
-	curl -Lo "${HOME}/.local/bin/encrypt" "${REPO_ENCRYPT}"/encrypt-linux-amd64
-	chmod +x "${HOME}/.local/bin/encrypt"
-fi
-
-if ! [ -x "${HOME}/.local/bin/decrypt" ]; then
-	curl -Lo "${HOME}/.local/bin/decrypt" "${REPO_ENCRYPT}"/decrypt-linux-amd64
-	chmod +x "${HOME}/.local/bin/decrypt"
-fi
-
-if ! [ -x "${HOME}/.local/bin/digest" ]; then
-	curl -Lo "${HOME}/.local/bin/digest" "${REPO_ENCRYPT}"/digest-linux-amd64
-	chmod +x "${HOME}/.local/bin/digest"
-fi
