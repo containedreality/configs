@@ -134,6 +134,7 @@ alias ng="nekoget"
 alias gpg="gpg --digest-algo SHA512 --cipher-algo AES256"
 alias shred='shred -vzn2'
 alias hshred='shred -vzn2 -s 32M' # for destroying headers
+alias ssh='ssh -o IdentityAgent=none'
 
 # apt
 alias aptu="sudo apt update && sudo apt upgrade"
