@@ -113,6 +113,8 @@ for i in vim vi nano ed; do
 	fi
 done
 
+export SSH_ASKPASS_REQUIRE='never'
+export SSH_ASKPASS=''
 export PAGER="$(which less)"
 
 export ARCHIVE_CIPHER='crdpa'
