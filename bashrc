@@ -117,7 +117,7 @@ export SSH_ASKPASS_REQUIRE='never'
 export SSH_ASKPASS=''
 export PAGER="$(which less)"
 
-export ARCHIVE_CIPHER='crdpa'
+export ARCHIVE_CIPHER='aes'
 
 export HISTFILE="${HOME}/.cache/bash_history"
 export HISTSIZE=100000
